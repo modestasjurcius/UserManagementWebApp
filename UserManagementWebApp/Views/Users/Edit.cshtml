@@ -24,8 +24,8 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Sex" class="control-label"></label>
-                <input asp-for="Sex" class="form-control" />
+                @Html.LabelFor(m => m.Sex)
+                @Html.DropDownListFor(m => m.Sex, Model.Sexs, new { @class = "form-control" })
                 <span asp-validation-for="Sex" class="text-danger"></span>
             </div>
             <div class="form-group">
