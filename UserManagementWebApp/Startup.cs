@@ -37,7 +37,7 @@ namespace UserManagementWebApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<UserManagementDbContext>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString("UserManagementDbContext")));
+                    options.UseMySql(Configuration.GetConnectionString("UserManagementDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +61,7 @@ namespace UserManagementWebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Users}/{action=Index}/{id?}");
             });
         }
     }
