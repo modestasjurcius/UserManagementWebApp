@@ -45,7 +45,13 @@ namespace UserManagementWebApp.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            return View();
+            var sex = GetAllSex();
+
+            var userModel = new User();
+
+            userModel.Sexs = GetSelectListItems(sex);
+
+            return View(userModel);
         }
 
         // POST: Users/Create
@@ -77,6 +83,11 @@ namespace UserManagementWebApp.Controllers
             {
                 return NotFound();
             }
+
+            var sex = GetAllSex();
+
+            user.Sexs = GetSelectListItems(sex);
+
             return View(user);
         }
 
@@ -147,6 +158,31 @@ namespace UserManagementWebApp.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
+        }
+
+        private IEnumerable<string> GetAllSex()
+        {
+            return new List<string>
+            {
+                "Male",
+                "Female"
+            };
+        }
+
+        private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)
+        {
+            var selectList = new List<SelectListItem>();
+
+            foreach (var element in elements)
+            {
+                selectList.Add(new SelectListItem
+                {
+                    Value = element,
+                    Text = element
+                });
+            }
+
+            return selectList;
         }
     }
 }
