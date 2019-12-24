@@ -49,7 +49,7 @@ namespace UserManagementWebApp.Controllers
 
             var userModel = new User();
 
-            userModel.Sexs = GetSelectListItems(sex);
+            userModel.Sexes = GetSelectListItems(sex);
 
             return View(userModel);
         }
@@ -86,7 +86,7 @@ namespace UserManagementWebApp.Controllers
 
             var sex = GetAllSex();
 
-            user.Sexs = GetSelectListItems(sex);
+            user.Sexes = GetSelectListItems(sex);
 
             return View(user);
         }

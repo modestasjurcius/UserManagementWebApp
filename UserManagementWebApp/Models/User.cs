@@ -18,6 +18,6 @@ namespace UserManagementWebApp.Models
         public string Description { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> Sexs { get; set; }
+        public IEnumerable<SelectListItem> Sexes { get; set; }
     }
 }
