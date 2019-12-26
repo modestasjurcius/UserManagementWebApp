@@ -70,6 +70,9 @@
                 },
                 BirthDate: {
                     required: true
+                },
+                Description: {
+                    maxlength: 255
                 }
             },
             messages: {
@@ -85,6 +88,9 @@
                 },
                 BirthDate: {
                     required: "Birth date is required"
+                },
+                Description: {
+                    maxlength: "Description is too long! Maximum length is 255 characters"
                 }
             }
         });
