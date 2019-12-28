@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,24 +8,11 @@ namespace UserManagementWebApp.Models
     public class User
     {
         public int Id { get; set; }
-
-        [DisplayName("First name")]
-        [Required]
         public string FirstName { get; set; }
-
-        [DisplayName("Last name")]
-        [Required]
         public string LastName { get; set; }
-
-        [Required]
         public string Sex { get; set; }
         
-        [DisplayName("Birth date")]
-        [Required]
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
-
-        [NotMapped]
-        public IEnumerable<SelectListItem> Sexes { get; set; }
     }
 }
