@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.custom-table-borders {
+    border: 2px solid black;
+}
+
+.custom-table-header {
+    border: 2px solid black;
+    background-color: slategrey;
+    color: white;
+}
