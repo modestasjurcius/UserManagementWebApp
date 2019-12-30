@@ -59,8 +59,9 @@ namespace UserManagementWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Sex,BirthDate,Description")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Username,Password,FirstName,LastName,Sex,BirthDate,Description")] User user)
         {
+            user.RegistrationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -96,7 +97,7 @@ namespace UserManagementWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Sex,BirthDate,Description")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,FirstName,LastName,Sex,BirthDate,Description")] User user)
         {
             if (id != user.Id)
             {
