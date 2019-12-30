@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserManagementWebApp.Models;
 
 namespace UserManagementWebApp.Migrations
 {
     [DbContext(typeof(UserManagementDbContext))]
-    partial class UserManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191230140113_Username-Password-RegistrationDate")]
+    partial class UsernamePasswordRegistrationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
