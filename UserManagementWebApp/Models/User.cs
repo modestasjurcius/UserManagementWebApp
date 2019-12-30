@@ -48,5 +48,9 @@ namespace UserManagementWebApp.Models
 
         [NotMapped]
         public IEnumerable<SelectListItem> Sexes { get; set; }
+
+        [NotMapped]
+        [DisplayName("Repeat password")]
+        public string PasswordConfirm { get; set; }
     }
 }
