@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UserManagementWebApp.Models;
+using X.PagedList;
 
 namespace UserManagementWebApp.Controllers
 {
@@ -19,9 +20,11 @@ namespace UserManagementWebApp.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.User.ToListAsync());
+            int pageNumber = (page ?? 1);
+            int pageSize = 5;
+            return View(_context.User.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Users/Details/5
