@@ -13,6 +13,14 @@ namespace UserManagementWebApp.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Username")]
+        [Required]
+        public string Username { get; set; }
+
+        [DisplayName("Password")]
+        [Required]
+        public string Password { get; set; }
+
         [DisplayName("First name")]
         [Required]
         public string FirstName { get; set; }
@@ -27,7 +35,10 @@ namespace UserManagementWebApp.Models
         [DisplayName("Birth date")]
         [Required]
         public DateTime BirthDate { get; set; }
+
         public string Description { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
 
         [NotMapped]
         public IEnumerable<SelectListItem> Sexes { get; set; }
