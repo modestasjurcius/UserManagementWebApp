@@ -13,6 +13,7 @@ namespace UserManagementWebApp.Controllers
     public class UsersController : Controller
     {
         private readonly UserManagementDbContext _context;
+        private const int indexTablePageSize = 5;
 
         public UsersController(UserManagementDbContext context)
         {
@@ -23,8 +24,17 @@ namespace UserManagementWebApp.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            int pageSize = 5;
-            return View(_context.User.ToPagedList(pageNumber, pageSize));
+
+            var isAjax = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+
+            if (isAjax)
+            {
+                return PartialView("IndexPartial",_context.User.ToPagedList(pageNumber, indexTablePageSize));
+            }
+            else
+            {
+                return View(_context.User.ToPagedList(pageNumber, indexTablePageSize));
+            }
         }
 
         // GET: Users/Details/5
