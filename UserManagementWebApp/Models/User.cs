@@ -13,23 +13,44 @@ namespace UserManagementWebApp.Models
     {
         public int Id { get; set; }
 
+        [DisplayName("Username")]
+        [Required]
+        [Column(TypeName = "VARCHAR(250)")]
+        public string Username { get; set; }
+
+        [DisplayName("Password")]
+        [Required]
+        [Column(TypeName = "VARCHAR(250)")]
+        public string Password { get; set; }
+
         [DisplayName("First name")]
         [Required]
+        [Column(TypeName = "VARCHAR(250)")]
         public string FirstName { get; set; }
 
         [DisplayName("Last name")]
         [Required]
+        [Column(TypeName = "VARCHAR(250)")]
         public string LastName { get; set; }
 
         [Required]
+        [Column(TypeName = "VARCHAR(10)")]
         public string Sex { get; set; }
         
         [DisplayName("Birth date")]
         [Required]
         public DateTime BirthDate { get; set; }
+
+        [Column(TypeName = "VARCHAR(250)")]
         public string Description { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
 
         [NotMapped]
         public IEnumerable<SelectListItem> Sexes { get; set; }
+
+        [NotMapped]
+        [DisplayName("Repeat password")]
+        public string PasswordConfirm { get; set; }
     }
 }

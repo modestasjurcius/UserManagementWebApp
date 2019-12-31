@@ -1,5 +1,18 @@
 ﻿$("#userDataForm").validate({
     rules: {
+        Username: {
+            required: true,
+            maxlength: 30,
+            minlength: 3
+        },
+        Password: {
+            required: true,
+            maxlength: 30,
+            minlength: 6
+        },
+        PasswordConfirm: {
+            equalTo: Password
+        },
         FirstName: {
             required: true,
             maxlength: 30,
@@ -18,6 +31,19 @@
         }
     },
     messages: {
+        Username: {
+            required: "Username is required",
+            maxlength: "Too long",
+            minlength: "Too short"
+        },
+        Password: {
+            required: "Password is required",
+            maxlength: "Too long",
+            minlength: "Too short"
+        },
+        PasswordConfirm: {
+            equalTo: "Passwords do not match"
+        },
         FirstName: {
             required: "First name is required",
             maxlength: "Too long",
