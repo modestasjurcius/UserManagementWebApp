@@ -6,63 +6,37 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        wireHandlers();
+    });
+
+</script>
 
 <h2>Index</h2>
 
 <p>
     <a class="btn btn-success" asp-action="Create">Create New User</a>
 </p>
-<table class="table custom-table-borders">
-    <thead class="custom-table-header">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sex)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a class="btn btn-info btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+<div id="tableContainer">
+    @await Html.PartialAsync("IndexPartial")
+</div>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-
+<script type="text/javascript">
+    function wireHandlers() {
+        $('#pager').on('click', 'a', function () {
+            $.ajax({
+                url: this.href,
+                type: 'GET',
+                cache: false,
+                success: function (result) {
+                    $('#tableContainer').html(result);
+                    wireHandlers();
+                }
+            });
+            return false;
+        });
+    }
+</script>
