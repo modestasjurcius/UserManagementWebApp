@@ -13,7 +13,7 @@ namespace UserManagementWebApp.Controllers
     public class UsersController : Controller
     {
         private readonly UserManagementDbContext _context;
-        private const int indexTablePageSize = 5;
+        private const int indexTablePageSize = 3;
 
         public UsersController(UserManagementDbContext context)
         {
