@@ -10,3 +10,7 @@
     background-color: slategrey;
     color: white;
 }
+
+.customError {
+    color: red;
+}
