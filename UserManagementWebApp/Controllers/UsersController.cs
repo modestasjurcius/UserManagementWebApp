@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UserManagementWebApp.Models;
+using X.PagedList;
 
 namespace UserManagementWebApp.Controllers
 {
     public class UsersController : Controller
     {
         private readonly UserManagementDbContext _context;
+        private const int indexTablePageSize = 3;
 
         public UsersController(UserManagementDbContext context)
         {
@@ -19,9 +21,20 @@ namespace UserManagementWebApp.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.User.ToListAsync());
+            int pageNumber = (page ?? 1);
+
+            var isAjax = Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+
+            if (isAjax)
+            {
+                return PartialView("IndexPartial",_context.User.ToPagedList(pageNumber, indexTablePageSize));
+            }
+            else
+            {
+                return View(_context.User.ToPagedList(pageNumber, indexTablePageSize));
+            }
         }
 
         // GET: Users/Details/5
@@ -59,8 +72,9 @@ namespace UserManagementWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Sex,BirthDate,Description")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Username,Password,FirstName,LastName,Sex,BirthDate,Description,RegistrationDate")] User user)
         {
+            user.RegistrationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -96,7 +110,7 @@ namespace UserManagementWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Sex,BirthDate,Description")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,FirstName,LastName,Sex,BirthDate,Description,RegistrationDate")] User user)
         {
             if (id != user.Id)
             {

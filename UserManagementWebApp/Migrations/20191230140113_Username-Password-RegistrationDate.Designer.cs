@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserManagementWebApp.Models;
 
 namespace UserManagementWebApp.Migrations
 {
     [DbContext(typeof(UserManagementDbContext))]
-    partial class UserManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191230140113_Username-Password-RegistrationDate")]
+    partial class UsernamePasswordRegistrationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,30 +26,24 @@ namespace UserManagementWebApp.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("VARCHAR(250)");
+                    b.Property<string>("Description");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
+                        .IsRequired();
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
+                        .IsRequired();
 
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
+                        .IsRequired();
 
                     b.Property<DateTime>("RegistrationDate");
 
                     b.Property<string>("Sex")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(10)");
+                        .IsRequired();
 
                     b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
+                        .IsRequired();
 
                     b.HasKey("Id");
 
