@@ -60,5 +60,12 @@
         Description: {
             maxlength: "Description is too long! Maximum length is 255 characters"
         }
+    },
+    errorElement: "div",
+    wrapper: "div",
+    errorPlacement: function (error, element) {
+        offset = element.offset();
+        error.insertAfter(element);
+        error.addClass('customError');
     }
 });
