@@ -47,10 +47,13 @@ namespace UserManagementWebApp.Models
         public DateTime RegistrationDate { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> Sexes { get; set; }
-
-        [NotMapped]
         [DisplayName("Repeat password")]
         public string PasswordConfirm { get; set; }
+    }
+
+    public enum Gender
+    {
+        Male,
+        Female
     }
 }

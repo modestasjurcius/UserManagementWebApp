@@ -67,5 +67,11 @@
         offset = element.offset();
         error.insertAfter(element);
         error.addClass('customError');
+    },
+    highlight: function (element, errorClass, validClass) {
+        $(element).addClass('error-border')
+    },
+    unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('error-border');
     }
 });

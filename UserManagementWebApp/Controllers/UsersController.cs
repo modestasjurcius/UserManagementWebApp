@@ -37,7 +37,7 @@ namespace UserManagementWebApp.Controllers
             }
         }
 
-        // GET: Users/Details/5
+        // GET: Users/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,8 +45,7 @@ namespace UserManagementWebApp.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.User.FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -58,18 +57,12 @@ namespace UserManagementWebApp.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
-            var sex = GetAllSex();
-
             var userModel = new User();
-
-            userModel.Sexes = GetSelectListItems(sex);
 
             return View(userModel);
         }
 
         // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Password,FirstName,LastName,Sex,BirthDate,Description,RegistrationDate")] User user)
@@ -84,7 +77,7 @@ namespace UserManagementWebApp.Controllers
             return View(user);
         }
 
-        // GET: Users/Edit/5
+        // GET: Users/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,10 +90,6 @@ namespace UserManagementWebApp.Controllers
             {
                 return NotFound();
             }
-
-            var sex = GetAllSex();
-
-            user.Sexes = GetSelectListItems(sex);
 
             return View(user);
         }
@@ -172,15 +161,6 @@ namespace UserManagementWebApp.Controllers
         private bool UserExists(int id)
         {
             return _context.User.Any(e => e.Id == id);
-        }
-
-        private IEnumerable<string> GetAllSex()
-        {
-            return new List<string>
-            {
-                "Male",
-                "Female"
-            };
         }
 
         private IEnumerable<SelectListItem> GetSelectListItems(IEnumerable<string> elements)

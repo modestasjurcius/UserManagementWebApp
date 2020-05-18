@@ -14,3 +14,8 @@
 .customError {
     color: red;
 }
+
+.error-border {
+    border: 2px solid;
+    border-color: red;
+}
